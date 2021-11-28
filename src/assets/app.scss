@@ -1,0 +1,32 @@
+@import './sass/var.scss';
+
+*{
+
+  font-size: 14px;
+  font-family: Microsoft YaHei,sans-serif,Arial;
+  padding: 0;
+  margin: 0;
+  ul,ol,li{
+    list-style: none;
+  }
+  a{
+    text-decoration: none;
+    color: #333;
+    &:hover{
+      color: #ff6700;
+    }
+  }
+}
+.clearfix{
+  &:before{
+    content: '';
+    display: table;
+  }
+  &:after{
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+
