@@ -222,7 +222,9 @@ export default {
     },
     //添加喜欢
     toogleLike(){
-      
+      if(!this.isLogin){
+        return;
+      }
       if(this.isHeartActive==false)
       //params product id  添加收藏
       FetchAPI.addToLike(this.$route.params.id)
