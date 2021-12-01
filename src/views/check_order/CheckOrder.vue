@@ -402,8 +402,10 @@ export default {
 
 <style lang="scss">
 .check-order-page {
+  background-color: #f5f5f5;
   .order-container{
     width: 1226px;
+    margin: 0 auto;
     padding: 40px 20px;
     background-color: #f5f5f5;
   }

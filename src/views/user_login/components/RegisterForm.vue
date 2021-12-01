@@ -88,9 +88,11 @@ export default {
 <style lang="scss">
   .register-form{
     position: absolute;
-    width: 80%;
-    height: 80%;
-    top: 80px;
+    width: 360px;
+    height: 280px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%); 
    input{
      width: 100%;
      height: 40px;
@@ -117,7 +119,8 @@ export default {
       background-color: #f06c11;
       &:hover{
         background-color: #f04645;
-      }      
+      }
+        
     }
    .alert-message{
      color: #f04645;

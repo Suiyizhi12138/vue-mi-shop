@@ -32,10 +32,10 @@
 </template>
 
 <script>
-import FetchAPI from '@/api/fetchApi';
-import axios from 'axios';
-import Loading from '@/components/common/Loading';
-import Config from '@/config/env'
+import FetchAPI from "@/api/fetchApi";
+import axios from "axios";
+import Loading from "@/components/common/Loading";
+import Config from "@/config/env";
 export default {
   components: {
     Loading
@@ -48,12 +48,10 @@ export default {
       passwordAlertMsg: "",
       isAccount: "",
       isPassword: "",
-      userLoginStatus: 0,//loading显示状态  0:（执行前）不显示 1:（执行）显示 2:（执行后）成功
+      userLoginStatus: 0 //loading显示状态  0:（执行前）不显示 1:（执行）显示 2:（执行后）成功
     };
   },
-  computed: {
-   
-  },
+  computed: {},
   methods: {
     handleLogin() {
       this.userLoginStatus = 1;
@@ -64,9 +62,8 @@ export default {
         this.accountAlertMsg = "请输入邮箱";
         return;
       } else if (!checkMail.test(this.userAccount)) {
-      this.accountAlertMsg = "邮箱格式不正确";
-      return;
-
+        this.accountAlertMsg = "邮箱格式不正确";
+        return;
       } else if (this.userPassword == "") {
         this.passwordAlertMsg = "请输入密码";
         return;
@@ -75,45 +72,46 @@ export default {
         return;
       } else {
         localStorage.removeItem("_user_token");
-        FetchAPI.login(this.userAccount,this.userPassword).
-        then((res) => {
-          if(res.status==200){
-            localStorage.setItem('_user_token',res.data.access_token);
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.access_token;
-            this.userLoginStatus = 2;
-            window.location.href= Config.DOMAIN+"/user/user_account/"+res.data.user_id+"/personalInfo"
-          }
-          
-        })
-        .catch((e)=>{
-          console.log(e)
-          this.$toast('用户邮箱或密码错误');
-          this.userLoginStatus = 3;
-        });
+        FetchAPI.login(this.userAccount, this.userPassword)
+          .then(res => {
+            if (res.status == 200) {
+              localStorage.setItem("_user_token", res.data.access_token);
+              axios.defaults.headers.common["Authorization"] =
+                "Bearer " + res.data.access_token;
+              this.userLoginStatus = 2;
+              window.location.href =
+                Config.DOMAIN +
+                "/user/user_account/" +
+                res.data.user_id +
+                "/personalInfo";
+            }
+          })
+          .catch(e => {
+            console.log(e);
+            this.$toast("用户邮箱或密码错误");
+            this.userLoginStatus = 3;
+          });
       }
     },
-    checkMail(){
+    checkMail() {
       let checkMail = /^([a-zA-Z]|[0-9])(\w)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-     
+
       //前端验证
       if (this.userAccount == "") {
         this.accountAlertMsg = "请输入邮箱";
       } else if (!checkMail.test(this.userAccount)) {
         this.accountAlertMsg = "邮箱格式不正确";
-      }else{
+      } else {
         this.accountAlertMsg = "";
       }
-
-      
-      
     },
-    checkPassword(){
+    checkPassword() {
       let checkPassword = /^(\w){6,20}$/;
       if (this.userPassword == "") {
         this.passwordAlertMsg = "请输入密码";
       } else if (!checkPassword.test(this.userPassword)) {
         this.passwordAlertMsg = "密码只能由6-20个字母、数字、下划线组成";
-      }else{
+      } else {
         this.passwordAlertMsg = "";
       }
     }
@@ -124,9 +122,12 @@ export default {
 <style lang="scss">
 .login-form {
   position: absolute;
-  width: 80%;
-  height: 80%;
-  top: 80px;
+  width: 360px;
+  height: 240px;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
   input {
     width: 100%;
     height: 40px;
@@ -152,6 +153,8 @@ export default {
     &:hover {
       background-color: #f04645;
     }
+    line-height: 60px;
+    height: 60px; 
   }
   .alert-message {
     color: #f04645;

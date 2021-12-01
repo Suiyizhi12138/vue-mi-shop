@@ -1,7 +1,6 @@
 <template>
   <div class="user-login">
-    <div class="fix-img">
-      </div>
+    <div class="fix-img"></div>
     <div class="login-container">
       <div class="login-header">
         <div class="login-header-left">
@@ -9,54 +8,61 @@
           <span>小米账号</span>
         </div>
         <div class="login-header-right">
-          <span >用户协议</span>
+          <span>用户协议</span>
           <span>隐私政策</span>
           <span>帮助中心</span>
         </div>
       </div>
       <div class="login-content">
-        <a href="javascript:" :class="{'link-active':isLogin}" @click="chooseRoute('login')">登录</a>
-        <a href="javascript:" :class="{'link-active':isRegister}" @click="chooseRoute('register')">注册</a>
+        <div class="login-content-head">
+          <a href="javascript:" :class="{'link-active':isLogin}" @click="chooseRoute('login')">登录</a>
+          <a
+            href="javascript:"
+            :class="{'link-active':isRegister}"
+            @click="chooseRoute('register')"
+            class="btn-register"
+          >注册</a>
+        </div>
+
         <transition name="slide-fade">
           <login-form v-if="isLogin"></login-form>
           <register-form v-if="isRegister"></register-form>
         </transition>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 export default {
-  data(){
+  data() {
     return {
-      isLogin: true,//是否登录页
-      isRegister: false,//是否注册页
-    }
+      isLogin: true, //是否登录页
+      isRegister: false //是否注册页
+    };
   },
-  components:{
+  components: {
     LoginForm,
     RegisterForm
   },
-  mounted(){
+  mounted() {
     this.initRoute();
   },
-  methods:{
-    initRoute(){
+  methods: {
+    initRoute() {
       this.chooseRoute(this.$route.params.action);
     },
-    chooseRoute(action){
-       if(action=="login"){
+    chooseRoute(action) {
+      if (action == "login") {
         this.isLogin = true;
         this.isRegister = false;
-      }else if(action=="register"){
+      } else if (action == "register") {
         this.isLogin = false;
         this.isRegister = true;
-      }else{
-        window.alert('请勿随意修改路由参数');
+      } else {
+        this.$toast("请勿随意修改路由参数");
       }
     }
   }
@@ -65,22 +71,25 @@ export default {
 
 <style lang="scss">
 .user-login {
-  height: auto;
+  position: fixed;
+  height: 100%;
   width: 100%;
   display: flex;
   .login-container {
-    
-    
-    width: 66.7%;
-    height: 600px;
-  
+    position: relative;
+    flex: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    min-height: 100vh;
     background-color: #f5f5f5;
-    .login-header{
-      margin-top: 20px;
+
+    .login-header {
+      margin-top: 30px;
       display: flex;
       justify-content: space-between;
-      .login-header-left{
-        .iconxiaomi{
+      .login-header-left {
+        .iconxiaomi {
           display: inline-block;
           color: #fff;
           background-color: #ff6700;
@@ -92,56 +101,88 @@ export default {
           border-radius: 10px;
           margin-left: 20px;
         }
-        span{
+        span {
           font-weight: 500;
           font-size: 26px;
           line-height: 40px;
           margin-left: 10px;
         }
       }
-      .login-header-right{
-        span{
+      .login-header-right {
+        padding-top: 10px;
+        span {
           color: #666;
           margin-left: 10px;
         }
       }
     }
     .login-content {
-      position: relative;
+      position: absolute;
       border: 1px solid #fff;
       border-radius: 5px;
-      width: 50%;
-      height: 70%;
-      margin: 10px auto 0;
+      width: 500px;
+      height: 400px;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+
       background-color: #fff;
-      .link-active {
-        font-weight: 500;
-        border-bottom: 4px solid #ff6700;
-        color: #333;
+      .login-content-head {
+        position: absolute;
+        width: 360px;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        .link-active {
+          font-weight: 500;
+          border-bottom: 4px solid #ff6700;
+          color: #333;
+        }
+        box-sizing: border-box;
+       
+        a {
+          font-size: 22px;
+          font-weight: 400;
+          color: #666;
+          transition: all 0.5s;
+          -webkit-transition: all 0.5s;
+          
+        }
+        a.btn-register{
+          margin-left: 16px;
+        }
       }
-      box-sizing: border-box;
-      padding: 5%;
-      a{
-        font-size: 22px;
-        font-weight: 400;
-        color: #666;
-        transition: all .5s;
-        -webkit-transition: all .5s;
-        margin-left: 16px;
-      }
-
-
-     
-     
     }
   }
+  @media only screen and (min-width: 1000px) {
+    .login-container {
+      margin-left: 200px;
+    }
+  }
+  @media only screen and (min-width: 1200px) {
+    .login-container {
+      margin-left: 375px;
+    }
+  }
+
   .fix-img {
-    width: 33.3%;
-    height: 600px;
+    height: 100%;
+    position: fixed;
     top: 0px;
-    background: url('https://cdn.web-global.fds.api.mi-img.com/mcfe--mi-account/static/static/media/banner.4994397e.jpg') no-repeat;
+    background: url("https://cdn.web-global.fds.api.mi-img.com/mcfe--mi-account/static/static/media/banner.4994397e.jpg")
+      no-repeat;
     background-size: cover;
-    background-position: 25%; 
+    background-position: 25%;
+  }
+  @media screen and (min-width: 1000px) {
+    .fix-img {
+      width: 200px;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .fix-img {
+      width: 375px;
+    }
   }
 }
 .slide-fade-enter-active,
