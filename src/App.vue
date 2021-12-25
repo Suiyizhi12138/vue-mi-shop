@@ -26,6 +26,7 @@ export default {
       }
       //获取购物车信息
       if(!this.$store.getters.cartItems){
+        
          this.$store.dispatch('getCartItems');
       }
     }

@@ -271,9 +271,7 @@ export default {
     }
   },
   watch: {
-    cartLoadStatus(val) {
-      console.log(val);
-    }
+   
   }
 };
 </script>

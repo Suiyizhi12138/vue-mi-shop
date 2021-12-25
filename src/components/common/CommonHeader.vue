@@ -74,10 +74,10 @@
         <div class="cart-hidden">
           
           <div class="cart-message">
-            <div class="cart-message" v-if="cartItems.length<=0&&cartLoadStatus==2">购物车中还没有物品，快去购物吧！</div>
+            <div class="cart-text" v-if="cartItems.length<=0&&cartLoadStatus==2||!logined">购物车中还没有物品，快去购物吧！</div>
             <div class="cart-list-box" v-else>
               <div class="loading-container" v-if="cartLoadStatus==1">
-                <loading ></loading>
+                <loading containerSize="'min'"></loading>
               </div>
               <div class="cart-list-container clearfix" v-else>
                 <ul class="cart-list">
@@ -177,6 +177,11 @@ export default {
     },
     loadCart() {
       this.cartLoadStatus = 1;
+      //如果用户未登录则直接返回 
+      if(!this.logined){
+        
+        return;
+      }
       FetchAPI.getCartItems()
         .then(res => {
           this.cartItems = res.data;
@@ -331,12 +336,13 @@ export default {
         z-index: 100;
         right: 0px;
         top: 40px;
+       
         box-shadow: 2px 2px 5px #ccc;
         transition: all 0.2s ease;
         background-color: #fff;
         .cart-message {
           position: relative;
-          margin-top: 30px;
+         padding: 30px 0;
           text-align: center;
         }
         .loading-container{

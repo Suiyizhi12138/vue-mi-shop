@@ -88,7 +88,7 @@ export default {
   height: 360px;
 }
 .loading-min{
-  width: auto;
-  height: auto;
+  width: 320px;
+  height: 100px;
 }
 </style>
