@@ -24,7 +24,12 @@ import "swiper/css/swiper.min.css";
 import Swiper from 'swiper/js/swiper.min.js';
 
 export default {
-  props:['images'],
+  props:{
+    images: {
+      type: Array,
+      required: true
+    }
+  },
   data(){
     return{
      

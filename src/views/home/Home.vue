@@ -475,7 +475,7 @@ export default {
         this.phones = res.data[0].products
           .concat(res.data[1].products)
           .slice(0, 8); //手机
-        this.tvVideos = res.data[2].products.slice(0, 8); //电视视频
+        this.tvVideos = res.data[2].products.slice(0, 8); //电视
         this.afs = res.data[15].products.slice(0, 8); //智能安防
         this.cxs = res.data[14].products.slice(0, 8); //智能出行
         this.earPhones = res.data[18].products
